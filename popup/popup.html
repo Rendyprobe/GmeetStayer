@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GmeetStayer</title>
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="header-logo">
+      <div class="logo-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+          <rect x="2" y="4" width="14" height="16" rx="2" fill="#fff" opacity="0.9"/>
+          <path d="M16 8l5-3v14l-5-3V8z" fill="#fff" opacity="0.9"/>
+          <circle cx="9" cy="12" r="2.5" fill="#1a73e8"/>
+        </svg>
+      </div>
+      <h1 class="header-title">GmeetStayer</h1>
+    </div>
+    <span class="version">v1.1</span>
+  </header>
+
+  <!-- Tab Navigation -->
+  <nav class="tab-nav">
+    <button class="tab-btn active" data-tab="status" title="Status">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+      </svg>
+      <span>Status</span>
+    </button>
+    <button class="tab-btn" data-tab="profile" title="My Profile">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+        <circle cx="12" cy="7" r="4"/>
+      </svg>
+      <span>Profile</span>
+    </button>
+    <button class="tab-btn" data-tab="settings" title="Settings">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="3"/>
+        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+      </svg>
+      <span>Settings</span>
+    </button>
+  </nav>
+
+  <!-- ═══ TAB: STATUS ═══ -->
+  <main class="tab-content active" id="tab-status">
+    <!-- Stay-in-Meet Toggle -->
+    <div class="card status-card">
+      <div class="card-row">
+        <div class="status-info">
+          <div class="status-dot-wrapper">
+            <span class="status-dot active" id="statusDot"></span>
+          </div>
+          <div>
+            <p class="status-label" id="statusLabel">Active</p>
+            <p class="status-desc" id="statusDesc">Monitoring Google Meet</p>
+          </div>
+        </div>
+        <label class="toggle">
+          <input type="checkbox" id="toggleSwitch" checked />
+          <span class="toggle-slider"></span>
+        </label>
+      </div>
+    </div>
+
+    <!-- Chat Monitor Toggle -->
+    <div class="card">
+      <div class="card-row">
+        <div class="status-info">
+          <span class="feature-icon">💬</span>
+          <div>
+            <p class="status-label">Chat Monitor</p>
+            <p class="status-desc">Auto-open Google links from chat</p>
+          </div>
+        </div>
+        <label class="toggle">
+          <input type="checkbox" id="chatMonitorToggle" checked />
+          <span class="toggle-slider"></span>
+        </label>
+      </div>
+    </div>
+
+    <!-- Auto-Fill Toggle -->
+    <div class="card">
+      <div class="card-row">
+        <div class="status-info">
+          <span class="feature-icon">📝</span>
+          <div>
+            <p class="status-label">Auto-Fill Forms</p>
+            <p class="status-desc">Fill Google Forms with profile + AI</p>
+          </div>
+        </div>
+        <label class="toggle">
+          <input type="checkbox" id="autoFillToggle" checked />
+          <span class="toggle-slider"></span>
+        </label>
+      </div>
+    </div>
+
+    <!-- Stats -->
+    <div class="card stats-card">
+      <p class="card-title">📊 Statistics</p>
+      <div class="stats-grid">
+        <div class="stat-item">
+          <span class="stat-value" id="saveCount">0</span>
+          <span class="stat-label">Stays Saved</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <span class="stat-value" id="formsOpened">0</span>
+          <span class="stat-label">Forms Opened</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Link History -->
+    <div class="card">
+      <p class="card-title">🔗 Recent Links</p>
+      <div class="link-history" id="linkHistory">
+        <p class="empty-state">No links opened yet</p>
+      </div>
+    </div>
+  </main>
+
+  <!-- ═══ TAB: PROFILE ═══ -->
+  <main class="tab-content" id="tab-profile">
+    <div class="card">
+      <p class="card-title">👤 My Profile</p>
+      <p class="card-subtitle">Auto-fill data for Google Forms</p>
+
+      <div class="form-group">
+        <label class="form-label" for="profileName">Full Name</label>
+        <input type="text" class="form-input" id="profileName" placeholder="Rendy ..." />
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="profileEmail">Email</label>
+        <input type="email" class="form-input" id="profileEmail" placeholder="rendy@example.com" />
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="profileNim">NIM / NRP / ID</label>
+        <input type="text" class="form-input" id="profileNim" placeholder="202301001" />
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="profilePhone">Phone / WhatsApp</label>
+        <input type="tel" class="form-input" id="profilePhone" placeholder="08123456789" />
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="profileInstitution">Institution / University</label>
+        <input type="text" class="form-input" id="profileInstitution" placeholder="Universitas ..." />
+      </div>
+
+      <button class="btn btn-primary" id="saveProfileBtn">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="20 6 9 17 4 12"/>
+        </svg>
+        Save Profile
+      </button>
+    </div>
+  </main>
+
+  <!-- ═══ TAB: SETTINGS ═══ -->
+  <main class="tab-content" id="tab-settings">
+    <!-- Gemini API Key -->
+    <div class="card">
+      <p class="card-title">🤖 Gemini AI</p>
+      <p class="card-subtitle">API key for AI-powered form answering</p>
+
+      <div class="form-group">
+        <label class="form-label" for="geminiKey">API Key</label>
+        <div class="input-with-action">
+          <input type="password" class="form-input" id="geminiKey" placeholder="AIza..." />
+          <button class="btn-icon" id="toggleKeyVisibility" title="Show/Hide">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+              <circle cx="12" cy="12" r="3"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <button class="btn btn-primary" id="saveKeyBtn">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="20 6 9 17 4 12"/>
+        </svg>
+        Save Key
+      </button>
+
+      <a class="help-link" href="https://aistudio.google.com/apikey" target="_blank">
+        🔑 Get a free API key from Google AI Studio →
+      </a>
+    </div>
+
+    <!-- Auto-Submit Toggle -->
+    <div class="card">
+      <div class="card-row">
+        <div class="status-info">
+          <span class="feature-icon">📤</span>
+          <div>
+            <p class="status-label">Auto-Submit</p>
+            <p class="status-desc status-desc-warning">Automatically submit filled forms</p>
+          </div>
+        </div>
+        <label class="toggle">
+          <input type="checkbox" id="autoSubmitToggle" />
+          <span class="toggle-slider"></span>
+        </label>
+      </div>
+      <p class="warning-text">⚠️ Use with caution — review AI answers before submitting!</p>
+    </div>
+
+    <!-- Reset -->
+    <div class="card">
+      <button class="btn btn-danger" id="resetBtn">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="1 4 1 10 7 10"></polyline>
+          <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path>
+        </svg>
+        Reset All Statistics
+      </button>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <span class="footer-credit">GmeetStayer · Made with ❤️</span>
+  </footer>
+
+  <script src="popup.js"></script>
+</body>
+</html>
